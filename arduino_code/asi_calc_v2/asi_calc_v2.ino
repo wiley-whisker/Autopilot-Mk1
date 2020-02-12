@@ -27,7 +27,9 @@ void loop() {
   
   // average a few ADC readings for stability
   for (int ii=0;ii<veloc_mean_size;ii++){
-    adc_avg+= analogRead(A0)-offset;
+    int analog_read = analogRead(A0);
+    adc_avg+= analog_read-offset;
+    Serial.println(analog_read);
   }
   adc_avg/=veloc_mean_size;
   
@@ -40,6 +42,6 @@ void loop() {
       veloc = sqrt((10000.0*((adc_avg/1023.0)-0.5))/rho);
     }
  }
-  Serial.println(veloc); // print velocity
+//  Serial.println(veloc); // print velocity
   delay(100); // delay for stability
 }
